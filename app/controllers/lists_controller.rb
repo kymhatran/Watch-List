@@ -11,7 +11,7 @@ class ListsController < ApplicationController
     @list = List.new(list_params)
     @list.save
 
-    redirect_to lists_path(list)
+    redirect_to lists_path(@lists)
   end
 
   def show
@@ -32,12 +32,12 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     @list.destroy
 
-    redirect_to lists_path(lists)
+    redirect_to lists_path(@lists)
   end
 
   private
 
   def list_params
-    params(:list).require(:name)
+    params.require(:list).permit(:name)
   end
 end
